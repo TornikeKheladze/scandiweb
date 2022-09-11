@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.app {
+  width: 1440px;
+  margin: auto;
+  z-index: 50;
+}
+button {
+  cursor: pointer;
+}
+ul {
+  list-style-type: none;
+}

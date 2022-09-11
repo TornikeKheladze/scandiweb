@@ -1,0 +1,58 @@
+.header {
+  height: 80px;
+  .categories {
+    cursor: pointer;
+    margin-top: 28px;
+    margin-left: 101px;
+    display: inline-block;
+    p {
+      display: inline-block;
+      font-weight: 600;
+      width: 65px;
+      text-align: center;
+      color: #5ece7b;
+      padding-bottom: 30px;
+    }
+    .active {
+      border-bottom: 2px solid #5ece7b;
+    }
+  }
+  .logo {
+    cursor: pointer;
+    position: absolute;
+    left: 704px;
+    top: 20px;
+    img {
+      width: 41px;
+    }
+  }
+  .currencies {
+    cursor: pointer;
+    z-index: 200;
+    position: absolute;
+    background-color: white;
+    right: 159px;
+    top: 29px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 29px;
+    .choosen {
+      background-color: rgb(150, 146, 146);
+    }
+    .choosen:hover {
+      background-color: rgb(150, 146, 146);
+    }
+    li:hover {
+      background-color: rgba(238, 238, 238, 1);
+    }
+    .firstLi {
+      text-align: right;
+    }
+  }
+  .cart {
+    cursor: pointer;
+    position: absolute;
+    right: 101px;
+    top: 34px;
+  }
+}
