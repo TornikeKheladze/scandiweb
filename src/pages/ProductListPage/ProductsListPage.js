@@ -12,7 +12,6 @@ class ProductListPage extends Component {
       });
     }
   };
-
   render() {
     return (
       <div className="productListPage">
@@ -28,8 +27,3 @@ const mapStateToProps = (store) => {
 };
 
 export default connect(mapStateToProps)(ProductListPage);
-
-// {
-//   fetchProducts,
-//   fetchSingleProduct,
-// }

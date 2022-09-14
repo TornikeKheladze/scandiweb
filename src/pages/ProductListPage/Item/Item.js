@@ -1,28 +1,57 @@
 import { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
 import "./Item.scss";
+import greenCart from "../../../assets/hover-cart.png";
+import outOfStock from "../../../assets/out-of-stock.png";
 
 class Item extends Component {
+  state = {
+    showCartButton: false,
+  };
   currencyFilter = () => {
     const [filtered] = this.props.prices.filter((prc) => {
       return prc.currency.label === this.props.choosenCurrency.label;
     });
     return filtered;
   };
-  render() {
-    // console.log(this.props);
+  cartButton = () => {
     return (
-      <div className="item">
-        <div>
-          <img className="item-img" src={this.props.gallery[0]} />
-          <h3 className="item-name">
-            {this.props.brand} {this.props.name}
-          </h3>
-          <p className="price">
-            {this.currencyFilter().amount}{" "}
-            {this.currencyFilter().currency.symbol}{" "}
-          </p>
-        </div>
+      this.state.showCartButton && (
+        <img src={greenCart} className="hoverButton" alt="cartButton" />
+      )
+    );
+  };
+
+  render() {
+    return (
+      <div
+        className="parentItem"
+        onMouseEnter={() => this.setState({ showCartButton: true })}
+        onMouseLeave={() => this.setState({ showCartButton: false })}
+      >
+        <Link to={`/product/${this.props.id}`} className="item">
+          <div>
+            <img
+              className="item-img"
+              src={this.props.gallery[0]}
+              alt="productImg"
+              style={!this.props.inStock ? { opacity: "0.5" } : null}
+            />
+            {!this.props.inStock && (
+              <img className="outOfStock" src={outOfStock} alt="ouf of stock" />
+            )}
+            <h3 className="item-name">
+              {this.props.brand} {this.props.name}
+            </h3>
+            <p className="price">
+              {this.currencyFilter().amount}
+              {this.currencyFilter().currency.symbol}
+            </p>
+          </div>
+        </Link>
+        {this.props.inStock && this.cartButton()}
       </div>
     );
   }

@@ -15,6 +15,7 @@ import {
 } from "../../features/headerSlice";
 import { fetchProducts } from "../../features/productsSlice";
 import Backdrop from "../Backdrop.js/Backdrop";
+import { Link } from "react-router-dom";
 
 class Header extends Component {
   state = {
@@ -24,6 +25,9 @@ class Header extends Component {
   componentDidMount() {
     this.props.fetchCategories();
     this.props.fetchCurrencies();
+    if (localStorage.getItem("category")) {
+      this.props.category(localStorage.getItem("category"));
+    }
   }
   componentDidUpdate() {
     this.defaultCurrency();
@@ -57,6 +61,7 @@ class Header extends Component {
               onClick={(e) => {
                 this.props.category(name);
                 this.props.fetchProducts(e.target.innerText);
+                localStorage.setItem("category", e.target.innerText);
               }}
               className={name === this.props.choosenCategory ? "active" : null}
               key={name}
@@ -119,7 +124,9 @@ class Header extends Component {
       <div className="header">
         {this.renderCategories()}
         <div className="logo">
-          <img src={logo} alt="logo" />
+          <Link to="/">
+            <img src={logo} alt="logo" />
+          </Link>
         </div>
         {this.renderCurrencies()}
       </div>
