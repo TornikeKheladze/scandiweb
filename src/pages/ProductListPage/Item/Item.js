@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import "./Item.scss";
 import greenCart from "../../../assets/hover-cart.png";
 import outOfStock from "../../../assets/out-of-stock.png";
+import { addToCart } from "../../../features/cartSlice";
 
 class Item extends Component {
   state = {
@@ -17,9 +18,30 @@ class Item extends Component {
     return filtered;
   };
   cartButton = () => {
+    let defaultAttributes = {};
+    this.props.attributes.forEach((att) => {
+      defaultAttributes[att.id] = att.items[0];
+    });
+    const { brand, name, prices, gallery, id, attributes } = this.props;
     return (
       this.state.showCartButton && (
-        <img src={greenCart} className="hoverButton" alt="cartButton" />
+        <img
+          src={greenCart}
+          className="hoverButton"
+          onClick={() => {
+            this.props.addToCart({
+              id,
+              attributes: defaultAttributes,
+              allAttributes: attributes,
+              quantity: 1,
+              brand,
+              name,
+              prices,
+              gallery,
+            });
+          }}
+          alt="cartButton"
+        />
       )
     );
   };
@@ -62,4 +84,4 @@ const mapStateToProps = (store) => {
   return { choosenCurrency };
 };
 
-export default connect(mapStateToProps)(Item);
+export default connect(mapStateToProps, { addToCart })(Item);

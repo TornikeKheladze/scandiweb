@@ -31,7 +31,7 @@
     z-index: 200;
     position: absolute;
     background-color: white;
-    right: 159px;
+    left: 1269px;
     top: 29px;
     font-size: 18px;
     font-weight: 500;
@@ -47,12 +47,27 @@
     }
     .firstLi {
       text-align: right;
+      display: flex;
     }
   }
   .cart {
     cursor: pointer;
     position: absolute;
-    right: 101px;
+    left: 1319px;
     top: 34px;
+    p {
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 20px;
+      height: 20px;
+      font-size: 14px;
+      background-color: black;
+      color: white;
+      position: absolute;
+      top: -10px;
+      right: -15px;
+    }
   }
 }

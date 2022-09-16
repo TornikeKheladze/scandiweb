@@ -66,13 +66,19 @@ class Header extends Component {
               className={name === this.props.choosenCategory ? "active" : null}
               key={name}
             >
-              {name}
+              <Link to="/">{name}</Link>
             </p>
           ))}
       </div>
     );
   };
-
+  itemQuantity = () => {
+    let initial = 0;
+    this.props.cart.forEach((item, i) => {
+      initial += item.quantity;
+    });
+    return initial !== 0 ? <p>{initial}</p> : null;
+  };
   renderCurrencies = () => {
     return (
       <>
@@ -131,12 +137,14 @@ class Header extends Component {
           </Link>
         </div>
         {this.renderCurrencies()}
-        <img
-          onClick={() => this.setState({ minicart: true })}
-          className="cart"
-          src={cart}
-          alt="minicart"
-        />
+        <div className="cart">
+          <img
+            onClick={() => this.setState({ minicart: true })}
+            src={cart}
+            alt="minicart"
+          />
+          {this.itemQuantity()}
+        </div>
         {this.state.minicart && (
           <MiniCart
             onBackdropClick={() => this.setState({ minicart: false })}
@@ -148,7 +156,7 @@ class Header extends Component {
 }
 
 const mapStateToProps = (store) => {
-  return { ...store.header, ...store.product };
+  return { ...store.header, ...store.product, ...store.cart };
 };
 
 export default connect(mapStateToProps, {

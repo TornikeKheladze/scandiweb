@@ -14,7 +14,7 @@ class CartData extends Component {
     );
     return (
       <h4 className="price">
-        {filtered.currency.label} {(filtered.amount * quantity).toFixed(2)}
+        {filtered.currency.symbol} {(filtered.amount * quantity).toFixed(2)}
       </h4>
     );
   };

@@ -41,6 +41,7 @@ const cartSlice = createSlice({
       if (!updated) {
         finalData.push(payload);
       }
+      console.log(payload);
 
       store.cart = finalData;
     },
