@@ -85,16 +85,7 @@ class Header extends Component {
         {this.state.dropDown && (
           <Backdrop click={() => this.setState({ dropDown: false })} />
         )}
-        <ul
-          className="currencies"
-          style={
-            this.state.dropDown
-              ? {
-                  boxShadow: " 0px 0px 9px 1px rgba(56, 50, 50, 1)",
-                }
-              : null
-          }
-        >
+        <ul className="currencies">
           <li
             className="firstLi"
             onClick={() => this.setState({ dropDown: !this.state.dropDown })}
@@ -104,24 +95,27 @@ class Header extends Component {
               <img src={this.state.dropDown ? up : down} />
             </span>
           </li>
-
-          {this.props.currencies &&
-            this.state.dropDown &&
-            this.props.currencies.map(({ label, symbol }) => (
-              <li
-                className={
-                  label === this.props.choosenCurrency.label ? "choosen" : null
-                }
-                onClick={() => {
-                  this.props.currency({ label, symbol });
-                  this.setState({ dropDown: false });
-                }}
-                key={label}
-              >
-                {label}
-                {symbol}
-              </li>
-            ))}
+          <div className={`${this.state.dropDown && "active"}`}>
+            {this.props.currencies &&
+              this.state.dropDown &&
+              this.props.currencies.map(({ label, symbol }) => (
+                <li
+                  className={
+                    label === this.props.choosenCurrency.label
+                      ? "choosen"
+                      : null
+                  }
+                  onClick={() => {
+                    this.props.currency({ label, symbol });
+                    this.setState({ dropDown: false });
+                  }}
+                  key={label}
+                >
+                  {label}
+                  {symbol}
+                </li>
+              ))}
+          </div>
         </ul>
       </>
     );
@@ -136,20 +130,22 @@ class Header extends Component {
             <img src={logo} alt="logo" />
           </Link>
         </div>
-        {this.renderCurrencies()}
-        <div className="cart">
-          <img
-            onClick={() => this.setState({ minicart: true })}
-            src={cart}
-            alt="minicart"
-          />
-          {this.itemQuantity()}
+        <div className="currenciesCart">
+          {this.renderCurrencies()}
+          <div className="cart">
+            <img
+              onClick={() => this.setState({ minicart: true })}
+              src={cart}
+              alt="minicart"
+            />
+            {this.itemQuantity()}
+          </div>
+          {this.state.minicart && (
+            <MiniCart
+              onBackdropClick={() => this.setState({ minicart: false })}
+            />
+          )}
         </div>
-        {this.state.minicart && (
-          <MiniCart
-            onBackdropClick={() => this.setState({ minicart: false })}
-          />
-        )}
       </div>
     );
   }

@@ -44,10 +44,7 @@ class Attribute extends Component {
                     productId: this.props.productId,
                   });
                 }
-              : () =>
-                  console.log(
-                    "nooooooooooo00000000000000000000000000000000000000000000000000000000000o"
-                  )
+              : null
           }
         >
           {x.value}

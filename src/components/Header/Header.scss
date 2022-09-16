@@ -1,5 +1,7 @@
 .header {
   height: 80px;
+  display: flex;
+  justify-content: space-between;
   .categories {
     cursor: pointer;
     margin-top: 28px;
@@ -26,48 +28,56 @@
       width: 41px;
     }
   }
-  .currencies {
-    cursor: pointer;
-    z-index: 200;
-    position: absolute;
-    background-color: white;
-    left: 1269px;
-    top: 29px;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 29px;
-    .choosen {
-      background-color: rgb(150, 146, 146);
+  .currenciesCart {
+    margin-right: 93px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    position: relative;
+    .currencies {
+      cursor: pointer;
+      z-index: 200;
+      background-color: white;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 29px;
+      .choosen {
+        background-color: rgb(150, 146, 146);
+      }
+      .choosen:hover {
+        background-color: rgb(150, 146, 146);
+      }
+      li:hover {
+        background-color: rgba(238, 238, 238, 1);
+      }
+      .firstLi {
+        text-align: right;
+        display: flex;
+      }
     }
-    .choosen:hover {
-      background-color: rgb(150, 146, 146);
-    }
-    li:hover {
-      background-color: rgba(238, 238, 238, 1);
-    }
-    .firstLi {
-      text-align: right;
-      display: flex;
-    }
-  }
-  .cart {
-    cursor: pointer;
-    position: absolute;
-    left: 1319px;
-    top: 34px;
-    p {
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 20px;
-      height: 20px;
-      font-size: 14px;
-      background-color: black;
-      color: white;
+    .active {
+      box-shadow: 0px 0px 9px 1px rgba(56, 50, 50, 1);
       position: absolute;
-      top: -10px;
-      right: -15px;
+      top: 65px;
+      width: 114px;
+    }
+    .cart {
+      cursor: pointer;
+      position: relative;
+      p {
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20px;
+        height: 20px;
+        font-size: 14px;
+        background-color: black;
+        color: white;
+        position: absolute;
+        top: -10px;
+        right: -15px;
+      }
     }
   }
 }
