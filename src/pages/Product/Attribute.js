@@ -22,7 +22,6 @@ class Attribute extends Component {
 
       const choosenStyle = () => {
         let style = null;
-
         if (x.value === choosenAttribute) {
           if (this.props.type === "swatch") {
             style = { boxShadow: "0px 0px 0px 3px rgba(94,206,123,1)" };

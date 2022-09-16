@@ -39,7 +39,6 @@ class Product extends Component {
       const {
         attributes,
         brand,
-        category,
         description,
         gallery,
         id,
@@ -107,7 +106,18 @@ class Product extends Component {
             <button
               disabled={attributes.length > 0 || !inStock ? !disable : false}
               className="addToCart"
-              onClick={() => this.props.addToCart(this.props.cart.attributes)}
+              onClick={() => {
+                this.props.addToCart({
+                  id,
+                  attributes: this.props.cart.attributes[id],
+                  allAttributes: attributes,
+                  quantity: 1,
+                  brand,
+                  name,
+                  prices,
+                  gallery,
+                });
+              }}
             >
               ADD TO CART
             </button>

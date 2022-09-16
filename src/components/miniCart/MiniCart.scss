@@ -1,0 +1,136 @@
+.miniCart {
+  background-color: white;
+  position: absolute;
+  z-index: 400;
+  max-height: 677px;
+  width: 357px;
+  right: 72px;
+  top: 78px;
+  padding: 32px 16px 32px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  .bagItems {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 26px;
+    align-self: flex-start;
+    margin-left: 16px;
+    span {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 26px;
+    }
+  }
+  .cartItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 325px;
+    .itemInfo {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      .name,
+      .brand {
+        font-family: Raleway;
+        font-size: 16px;
+        font-weight: 300;
+      }
+      .price {
+        font-family: Raleway;
+        font-size: 16px;
+        font-weight: 500;
+      }
+      .attributeItems {
+        .attributeId {
+          font-family: Raleway;
+          font-size: 14px;
+          font-weight: 400;
+        }
+        .list {
+          margin-top: 8px;
+          display: flex;
+          gap: 8px;
+          p {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 24px;
+            min-width: 24px;
+            border: 1px solid black;
+            font-family: Source Sans Pro;
+            font-size: 14px;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+    .right {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      .addRemove {
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        button {
+          height: 24px;
+          width: 24px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 0px;
+          font-size: 25px;
+          color: rgba(29, 31, 34, 1);
+          border: 1px solid rgba(29, 31, 34, 1);
+        }
+        p {
+          font-size: 16px;
+          font-weight: 500;
+        }
+      }
+      .image {
+        img {
+          max-height: 190px;
+          max-width: 121px;
+        }
+      }
+    }
+  }
+  .totalAmount {
+    display: flex;
+    align-self: stretch;
+    justify-content: space-between;
+    h4 {
+      font-family: Roboto;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    h3 {
+      font-family: Raleway;
+      font-size: 16px;
+      font-weight: 700;
+    }
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 325px;
+    button {
+      font-family: Raleway;
+      font-size: 14px;
+      font-weight: 400;
+      height: 43px;
+      width: 140px;
+    }
+    .checkout {
+      background-color: #5ece7b;
+      border: none;
+      color: white;
+    }
+  }
+}

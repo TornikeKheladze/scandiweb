@@ -8,6 +8,7 @@ class Backdrop extends Component {
           this.props.type === "miniCart"
             ? {
                 backgroundColor: "rgba(0, 0, 0, 0.5)",
+                zIndex: "300",
               }
             : null
         }

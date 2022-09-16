@@ -16,6 +16,7 @@ import {
 import { fetchProducts } from "../../features/productsSlice";
 import Backdrop from "../Backdrop.js/Backdrop";
 import { Link } from "react-router-dom";
+import MiniCart from "../miniCart/MiniCart";
 
 class Header extends Component {
   state = {
@@ -51,7 +52,6 @@ class Header extends Component {
     if (this.props.categories.length > 0)
       this.props.category(this.props.categories[0].name);
   };
-
   renderCategories = () => {
     return (
       <div className="categories">
@@ -106,7 +106,10 @@ class Header extends Component {
                 className={
                   label === this.props.choosenCurrency.label ? "choosen" : null
                 }
-                onClick={() => this.props.currency({ label, symbol })}
+                onClick={() => {
+                  this.props.currency({ label, symbol });
+                  this.setState({ dropDown: false });
+                }}
                 key={label}
               >
                 {label}
@@ -114,7 +117,6 @@ class Header extends Component {
               </li>
             ))}
         </ul>
-        <img className="cart" src={cart} />
       </>
     );
   };
@@ -129,6 +131,17 @@ class Header extends Component {
           </Link>
         </div>
         {this.renderCurrencies()}
+        <img
+          onClick={() => this.setState({ minicart: true })}
+          className="cart"
+          src={cart}
+          alt="minicart"
+        />
+        {this.state.minicart && (
+          <MiniCart
+            onBackdropClick={() => this.setState({ minicart: false })}
+          />
+        )}
       </div>
     );
   }
