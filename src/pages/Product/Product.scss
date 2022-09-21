@@ -107,19 +107,30 @@
           }
         }
       }
-      .addToCart {
-        cursor: pointer;
-        height: 52px;
-        width: 292px;
-        background-color: rgba(94, 206, 123, 1);
-        padding: 16px 32px 16px 32px;
-        font-family: Raleway;
-        font-size: 16px;
-        font-weight: 600;
-        color: white;
-        border: none;
-        margin-bottom: 40px;
+      .addToCartWrapper {
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+
+        p {
+          margin-top: 10px;
+          color: red;
+        }
+        .addToCart {
+          cursor: pointer;
+          height: 52px;
+          width: 292px;
+          background-color: rgba(94, 206, 123, 1);
+          padding: 16px 32px 16px 32px;
+          font-family: Raleway;
+          font-size: 16px;
+          font-weight: 600;
+          color: white;
+          border: none;
+        }
+        padding-bottom: 20px;
       }
+
       .addToCart:disabled {
         cursor: not-allowed;
       }

@@ -13,10 +13,13 @@ import {
   fetchCategories,
   fetchCurrencies,
 } from "../../features/headerSlice";
+
 import { fetchProducts } from "../../features/productsSlice";
 import Backdrop from "../Backdrop.js/Backdrop";
 import { Link } from "react-router-dom";
 import MiniCart from "../miniCart/MiniCart";
+import Currencies from "./Currencies";
+import Categories from "./Categories";
 
 class Header extends Component {
   state = {
@@ -52,93 +55,36 @@ class Header extends Component {
     if (this.props.categories.length > 0)
       this.props.category(this.props.categories[0].name);
   };
-  renderCategories = () => {
-    return (
-      <div className="categories">
-        {this.props.categories &&
-          this.props.categories.map(({ name }) => (
-            <p
-              onClick={(e) => {
-                this.props.category(name);
-                this.props.fetchProducts(e.target.innerText);
-                localStorage.setItem("category", e.target.innerText);
-              }}
-              className={name === this.props.choosenCategory ? "active" : null}
-              key={name}
-            >
-              <Link to="/">{name}</Link>
-            </p>
-          ))}
-      </div>
-    );
-  };
-  itemQuantity = () => {
-    let initial = 0;
-    this.props.cart.forEach((item, i) => {
-      initial += item.quantity;
-    });
-    return initial !== 0 ? <p>{initial}</p> : null;
-  };
-  renderCurrencies = () => {
-    return (
-      <>
-        {this.state.dropDown && (
-          <Backdrop click={() => this.setState({ dropDown: false })} />
-        )}
-        <ul className="currencies">
-          <li
-            className="firstLi"
-            onClick={() => this.setState({ dropDown: !this.state.dropDown })}
-          >
-            {this.props.choosenCurrency.symbol}
-            <span>
-              <img src={this.state.dropDown ? up : down} />
-            </span>
-          </li>
-          <div className={`${this.state.dropDown && "active"}`}>
-            {this.props.currencies &&
-              this.state.dropDown &&
-              this.props.currencies.map(({ label, symbol }) => (
-                <li
-                  className={
-                    label === this.props.choosenCurrency.label
-                      ? "choosen"
-                      : null
-                  }
-                  onClick={() => {
-                    this.props.currency({ label, symbol });
-                    this.setState({ dropDown: false });
-                  }}
-                  key={label}
-                >
-                  {label}
-                  {symbol}
-                </li>
-              ))}
-          </div>
-        </ul>
-      </>
-    );
-  };
 
   render() {
     return (
       <div className="header">
-        {this.renderCategories()}
+        <Categories
+          categories={this.props.categories}
+          category={this.props.category}
+          fetchProducts={this.props.fetchProducts}
+          choosenCategory={this.props.choosenCategory}
+        />
+
         <div className="logo">
           <Link to="/">
             <img src={logo} alt="logo" />
           </Link>
         </div>
         <div className="currenciesCart">
-          {this.renderCurrencies()}
-          <div className="cart">
-            <img
-              onClick={() => this.setState({ minicart: true })}
-              src={cart}
-              alt="minicart"
-            />
-            {this.itemQuantity()}
+          <Currencies
+            choosenCurrency={this.props.choosenCurrency}
+            currencies={this.props.currencies}
+            currency={this.props.currency}
+          />
+          <div
+            className="cart"
+            onClick={() => this.setState({ minicart: true })}
+          >
+            <img src={cart} alt="minicart" />
+            {this.props.totalQuantity !== 0 ? (
+              <p>{this.props.totalQuantity}</p>
+            ) : null}
           </div>
           {this.state.minicart && (
             <MiniCart

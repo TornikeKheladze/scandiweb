@@ -12,12 +12,12 @@ class Product extends Component {
   state = {
     displayedImage: null,
     showMore: false,
+    showError: false,
   };
   componentDidMount() {
     const id = this.props.router.params.id;
     this.props.fetchSingleProduct(id);
   }
-  componentDidUpdate() {}
 
   renderImages = () => {
     const list = this.props.product.singleProduct.gallery
@@ -74,6 +74,14 @@ class Product extends Component {
         ? attributes.length ===
           Object.keys(this.props.cart.attributes[id]).length
         : null;
+      const renderError = () => {
+        if (this.state.showError) {
+          if (!inStock) {
+            return <p>OUT OF STOCK!</p>;
+          }
+          return <p>Please choose attributes</p>;
+        }
+      };
 
       return (
         <div className="mainInfo">
@@ -102,25 +110,34 @@ class Product extends Component {
             <h4 className="amount">
               {filterPrice.currency.symbol} {filterPrice.amount}
             </h4>
-
-            <button
-              disabled={attributes.length > 0 || !inStock ? !disable : false}
-              className="addToCart"
-              onClick={() => {
-                this.props.addToCart({
-                  id,
-                  attributes: this.props.cart.attributes[id],
-                  allAttributes: attributes,
-                  quantity: 1,
-                  brand,
-                  name,
-                  prices,
-                  gallery,
-                });
-              }}
-            >
-              ADD TO CART
-            </button>
+            <div className="addToCartWrapper">
+              <button
+                className="addToCart"
+                onClick={
+                  !disable
+                    ? () => {
+                        this.setState({ showError: true });
+                      }
+                    : () => {
+                        this.setState({ showError: false });
+                        this.props.addToCart({
+                          id,
+                          attributes: this.props.cart.attributes[id],
+                          allAttributes: attributes,
+                          quantity: 1,
+                          brand,
+                          name,
+                          prices,
+                          gallery,
+                          choosenCurrency: this.props.header.choosenCurrency,
+                        });
+                      }
+                }
+              >
+                ADD TO CART
+              </button>
+              {renderError()}
+            </div>
             <div
               className="description"
               dangerouslySetInnerHTML={{

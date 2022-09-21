@@ -7,9 +7,6 @@ class CartAttributes extends Component {
         this.props.type === "swatch"
           ? {
               backgroundColor: item.value,
-              fontSize: 0,
-              height: "16px",
-              minWidth: "16px",
             }
           : null;
 
@@ -25,7 +22,11 @@ class CartAttributes extends Component {
         return style;
       };
       return (
-        <p style={{ ...swatchStyle, ...choosenStyle() }} key={item.id}>
+        <p
+          className={this.props.type === "swatch" ? "swatch" : null}
+          style={{ ...swatchStyle, ...choosenStyle() }}
+          key={item.id}
+        >
           {item.value}
         </p>
       );

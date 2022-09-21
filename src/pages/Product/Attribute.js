@@ -4,8 +4,6 @@ import { connect } from "react-redux";
 import { handleAttributes } from "../../features/cartSlice";
 
 class Attribute extends Component {
-  componentDidMount() {}
-
   attributeItems = () => {
     const list = this.props.items.map((x, i) => {
       let choosenAttribute = null;
@@ -39,8 +37,9 @@ class Attribute extends Component {
             this.props.inStock
               ? () => {
                   this.props.handleAttributes({
-                    ...x,
+                    displayValue: x.displayValue,
                     id: this.props.id,
+                    value: x.value,
                     productId: this.props.productId,
                   });
                 }

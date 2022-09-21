@@ -8,30 +8,19 @@ import "./MiniCart.scss";
 
 class MiniCart extends Component {
   itemQuantity = () => {
-    let initial = 0;
-    this.props.cart.cart.forEach((item, i) => {
-      initial += item.quantity;
-    });
     return (
       <h3 className="bagItems">
-        My bag, <span>{initial} items</span>
+        My bag, <span>{this.props.cart.totalQuantity} items</span>
       </h3>
     );
   };
   totalAmount = () => {
-    let totalAmount = 0;
-    let curPrice = null;
-    this.props.cart.cart.forEach((item) => {
-      [curPrice] = item.prices.filter(
-        (prc) => prc.currency.label === this.props.header.choosenCurrency.label
-      );
-      totalAmount += curPrice.amount * item.quantity;
-    });
     return (
       <div className="totalAmount">
         <h4>total:</h4>
         <h3>
-          {totalAmount.toFixed(2)} {curPrice.currency.symbol}{" "}
+          {this.props.cart.totalAmount}{" "}
+          {this.props.header.choosenCurrency.symbol}
         </h3>
       </div>
     );

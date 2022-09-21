@@ -18,11 +18,13 @@ class Item extends Component {
     return filtered;
   };
   cartButton = () => {
+    const { brand, name, prices, gallery, id, attributes } = this.props;
     let defaultAttributes = {};
     this.props.attributes.forEach((att) => {
-      defaultAttributes[att.id] = att.items[0];
+      let attr = { ...att.items[0], id: att.id, productId: id };
+      defaultAttributes[att.id] = attr;
     });
-    const { brand, name, prices, gallery, id, attributes } = this.props;
+
     return (
       this.state.showCartButton && (
         <img
@@ -38,6 +40,7 @@ class Item extends Component {
               name,
               prices,
               gallery,
+              choosenCurrency: this.props.choosenCurrency,
             });
           }}
           alt="cartButton"

@@ -3,21 +3,21 @@ import { connect } from "react-redux";
 
 import CartAttributes from "./CartAttributes";
 import { addToCart, removeItem } from "../../features/cartSlice";
+import CartImage from "../../pages/CartPage/CartImage";
 
 class CartData extends Component {
-  state = {
-    activeImg: 0,
-  };
-  price = (prices, quantity) => {
+  price = (prices) => {
     const [filtered] = prices.filter(
       (prc) => prc.currency.label === this.props.choosenCurrency.label
     );
+
     return (
       <h4 className="price">
-        {filtered.currency.symbol} {(filtered.amount * quantity).toFixed(2)}
+        {filtered.currency.symbol} {filtered.amount.toFixed(2)}
       </h4>
     );
   };
+
   mappedData = () => {
     if (this.props.cart) {
       return this.props.cart.map((item, i) => {
@@ -28,7 +28,7 @@ class CartData extends Component {
                 <h3 className="brand">{item.brand}</h3>
                 <h3 className="name">{item.name}</h3>
               </div>
-              {this.price(item.prices, item.quantity)}
+              {this.price(item.prices)}
               {item.allAttributes.map((attr) => (
                 <CartAttributes
                   {...attr}
@@ -43,11 +43,18 @@ class CartData extends Component {
                   +
                 </button>
                 <p>{item.quantity}</p>
-                <button onClick={() => this.props.removeItem(i)}>-</button>
+                <button
+                  onClick={() =>
+                    this.props.removeItem({
+                      index: i,
+                      ...this.props.choosenCurrency,
+                    })
+                  }
+                >
+                  -
+                </button>
               </div>
-              <div className="image">
-                <img src={item.gallery[0]} />
-              </div>
+              <CartImage gallery={item.gallery} type={this.props.type} />
             </div>
           </div>
         );
